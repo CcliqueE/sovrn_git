@@ -1,7 +1,7 @@
-POST https://tranquil-waters-54677.herokuapp.com/
+POST https://api-inv-fou.herokuapp.com/
 Content-Type: application/json
 
 {
-    "number_one": 2,
-    "number_two": 3
+    "number_one": 45,
+    "number_two": 70
 }
