@@ -11,11 +11,13 @@ app.use(express.json())
 
 //ROUTES//
 
-arr = [1, 3, 4, 5, 7]
-
 app.post('/', (req, res) => {
     
-    res.json(arr)
+    const a = req.body.number_one
+    const b = req.body.number_two
+    
+    res.json(a + b)
+
 })
 
 
