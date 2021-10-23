@@ -1,1 +1,7 @@
-POST https://git.heroku.com/tranquil-waters-54677.git
+POST https://tranquil-waters-54677.herokuapp.com/
+Content-Type: application/json
+
+{
+    "number_one": 2,
+    "number_two": 3
+}

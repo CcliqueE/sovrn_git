@@ -16,7 +16,7 @@ app.post('/', (req, res) => {
     const a = req.body.number_one
     const b = req.body.number_two
     
-    res.json(a + b)
+    res.json(a * b)
 
 })
 
