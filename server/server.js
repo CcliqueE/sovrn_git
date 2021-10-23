@@ -1,3 +1,4 @@
+const PORT = process.env.PORT || 3000
 const express = require('express')
 const app = express()
 const pool = require('./db')
@@ -19,4 +20,4 @@ app.post('/', (req, res) => {
 
 
 
-app.listen(3000, () => {console.log('server has started on port 3000')})
+app.listen(PORT, () => {console.log('server has started on port 3000')})
