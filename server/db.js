@@ -1,15 +1,15 @@
 const Pool = require('pg/lib').Pool
 
 const pool = new Pool({
-    // user: 'postgres',
-    // password: 'Tranquil8974@4544',
-    // host: 'localhost',
-    // port: 5432,
-    // database: 'fund'
-    connectionString: 'postgres://yuxvtigeucsotu:96b9aefa24d5b6b995e4694ca18f516fa5802b5e9156dbea5fa8c9cc6d5b6967@ec2-54-91-188-254.compute-1.amazonaws.com:5432/d4vfnun7287llt',
-    ssl: {
-        rejectUnauthorized: false
-    }
+    user: 'postgres',
+    password: 'Tranquil8974@4544',
+    host: 'localhost',
+    port: 5432,
+    database: 'fund'
+    // connectionString: 'postgres://yuxvtigeucsotu:96b9aefa24d5b6b995e4694ca18f516fa5802b5e9156dbea5fa8c9cc6d5b6967@ec2-54-91-188-254.compute-1.amazonaws.com:5432/d4vfnun7287llt',
+    // ssl: {
+    //     rejectUnauthorized: false
+    // }
 })
 
 module.exports = pool
