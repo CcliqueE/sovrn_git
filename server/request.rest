@@ -1,4 +1,15 @@
-POST https://api-inv-fou.herokuapp.com/
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "username": "one",
+    "email": "one@email.com",
+    "password": "password"
+}
+
+###
+
+POST https://api-inv-fou.herokuapp.com/register
 Content-Type: application/json
 
 {
