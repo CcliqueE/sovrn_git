@@ -1,0 +1,29 @@
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "username": "five",
+    "email": "five@email.com",
+    "password": "password"
+}
+
+###
+
+POST https://api-inv-fou.herokuapp.com/register
+Content-Type: application/json
+
+{
+    "username": "six",
+    "email": "six@email.com",
+    "password": "password"
+}
+
+###
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "one@email.com",
+    "password": "password"
+}
