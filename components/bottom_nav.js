@@ -33,7 +33,7 @@ export default function Bottom_Nav() {
 					/>}
 				</View>
 			)}} />
-			<Tab.Screen name="discover" component={Discover} options={{ animationEnabled: false,
+			<Tab.Screen name="discover" component={Discover} options={{ headerStyle: {height: 0}, animationEnabled: false,
 			tabBarIcon: ({ focused }) => (
 				<View style={styles.icon_flow}>
 					{focused ? <Image 

@@ -14,9 +14,34 @@ export default function Profile({ navigation }) {
     const plus_press = () => {
 		navigation.navigate('create_post')
 	}
+    
+    const settings_press = () => {
+		navigation.navigate('settings')
+	}
+
+    const directMsg_press = () => {
+		navigation.navigate('direct_msg')
+	}
+
+    const followers_stats = () => {
+		navigation.navigate('followers')
+	}
+
+    const following_stats = () => {
+		navigation.navigate('following')
+	}
+
+    const wallet_press = () => {
+		navigation.navigate('wallet')
+	}
+
+    const editProfile_press = () => {
+		navigation.navigate('edit_profile')
+	}
 
     const [loaded] = useFonts({
-        'Louis': require('../assets/fonts/Louis_George_Cafe.ttf')
+        'Louis': require('../assets/fonts/Louis_George_Cafe.ttf'),
+        'LinLibertime': require('../assets/fonts/LinLibertime.ttf')
     })
 
     if (!loaded) {
@@ -26,12 +51,13 @@ export default function Profile({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.profile_container}>
-                <Pressable>
+                <Text style={styles.truth_title} >truth</Text>
+                <Pressable onPress={settings_press} >
                     <Image 
                     source={gear_icon} 
                     style={styles.gear_icon}/>
                 </Pressable>
-                <Pressable>
+                <Pressable onPress={directMsg_press} >
                     <Image 
                     source={dm_icon} 
                     style={styles.dm_icon}/>
@@ -40,32 +66,39 @@ export default function Profile({ navigation }) {
                 source={profile_img} 
                 style={styles.profile_img}/>
                 <Text style={styles.username} >John Smith</Text>
-                <Text style={styles.user_role} >Founder</Text>
                 <View style={styles.stats}>
-                    <View style={styles.followers}>
-                        <Text style={styles.stats_text}>Followers</Text>
-                        <View style={styles.follow_line}/>
-                        <Text style={styles.stats_text}>120</Text>
-                    </View>
-                    <View style={styles.following}>
-                        <Text style={styles.stats_text}>Following</Text>
-                        <View style={styles.follow_line}/>
-                        <Text style={styles.stats_text}>70</Text>
-                    </View>
+                    <Pressable onPress={followers_stats} >
+                        <View style={styles.followers}>
+                            <Text style={styles.stats_text}>Followers</Text>
+                            <View style={styles.follow_line}/>
+                            <Text style={styles.stats_text}>120</Text>
+                        </View>
+                    </Pressable>
+                    <View style={styles.stats_middle}/>
+                    
+                    <Pressable onPress={following_stats} > 
+                        <View style={styles.following}>
+                            <Text style={styles.stats_text}>Following</Text>
+                            <View style={styles.follow_line}/>
+                            <Text style={styles.stats_text}>70</Text>
+                        </View>
+                    </Pressable>
+                    
                 </View>
                 <View style={styles.profile_btns} >
-                    <Pressable style={styles.wallet_btn}>
+                    <Pressable onPress={wallet_press} style={styles.wallet_btn}>
                         <LinearGradient 
-                        style={styles.profButton_grad} 
-                        colors={['#A8A8A8', '#777777']}
+                        style={styles.wallet_grad} 
+                        colors={['#8F8F8F', '#616161']}
                         start={{ x: 0, y: 1}}>
                             <Text style={styles.wallet_text}>Wallet</Text>
                         </LinearGradient>
                     </Pressable>
-                    <Pressable style={styles.editprof_btn}>
+                    <View style={styles.btns_middle} />
+                    <Pressable onPress={editProfile_press} style={styles.editprof_btn}>
                         <LinearGradient 
-                        style={styles.profButton_grad} 
-                        colors={['#A8A8A8', '#777777']}
+                        style={styles.edit_grad} 
+                        colors={['#8F8F8F', '#616161']}
                         start={{ x: 0, y: 1}}>
                             <Text style={styles.editprof_text}>Edit Profile</Text>
                         </LinearGradient>
@@ -92,12 +125,25 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#535353'
     },
+    truth_title: {
+        position: 'absolute',
+        top: 38,
+        left: 169,
+        fontSize: 40,
+        fontFamily: 'LinLibertime',
+        color: 'black'
+    },
     postButton: {
 		position: 'absolute',
 		top: 0,
 		left: 0,
 		width: 92,
 		height: 100,
+        height: 100,
+        backgroundColor: "#ffffff",
+        shadowColor: "#000000",
+        shadowOpacity: 1.0,
+        shadowRadius: 2,
 		borderBottomRightRadius: 50,
 		backgroundColor: '#828282',
 		overflow: 'hidden'
@@ -116,7 +162,7 @@ const styles = StyleSheet.create({
 	},
     profile_container: {
         width: '100%',
-        height: 450,
+        height: 415,
         top: 0,
         backgroundColor: '#424242',
         alignItems: 'center'
@@ -125,15 +171,15 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: 37,
         height: 37,
-        right: 70,
-        top: 40
+        right: 65,
+        top: 43
     },
     dm_icon: {
         position: 'absolute',
         width: 33,
         height: 25,
         left: 150,
-        top: 46
+        top: 51
     },
     profile_img: {
         height: 85,
@@ -144,8 +190,9 @@ const styles = StyleSheet.create({
     },
     username: {
         fontSize: 30,
-        top: 110,
-        fontFamily: 'Louis'
+        top: 115,
+        fontFamily: 'Louis',
+        color: '#C2C2C2'
     },
     user_role: {
         fontSize: 30,
@@ -168,8 +215,10 @@ const styles = StyleSheet.create({
 
     },
     followers: {
-        alignItems: 'center',
-        paddingRight: 30
+        alignItems: 'center'
+    },
+    stats_middle: {
+        width: 30
     },
     following: {
         alignItems: 'center'
@@ -185,38 +234,46 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         
     },
-    profButton_grad: {
-        left: 10
+    btns_middle: {
+        width: 23
+    },
+    wallet_grad: {
+        width: 120,
+        height: 43,
+        left: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    edit_grad: {
+        width: 165,
+        height: 43,
+        left: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     wallet_btn: {
         overflow: 'hidden',
         borderRadius: 5,
-        right: 17,
-		backgroundColor: '#A8A8A8',
+        alignItems: 'center',
+		backgroundColor: '#8F8F8F',
 
     },
     wallet_text: {
-        margin: 4,
-        marginLeft: 15,
-        marginRight: 15,
         fontSize: 30,
-        right: 10,
+        top: 1,        
         fontFamily: 'Louis',
-        color: '#3D3D3D'
+        color: '#B2B2B2'
     },
     editprof_btn: {
 		overflow: 'hidden',
         borderRadius: 5,
-        left: 17,
-		backgroundColor: '#A8A8A8',
+		backgroundColor: '#8F8F8F',
     },
     editprof_text: {
-        margin: 4,
-        marginLeft: 15,
-        marginRight: 15,
         fontSize: 30,
-        right: 10,
         fontFamily: 'Louis',
-        color: '#3D3D3D'
+        left: 2,
+        top: 1,
+        color: '#B2B2B2'
     }
 })
