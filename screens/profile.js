@@ -52,59 +52,63 @@ export default function Profile({ navigation }) {
         <View style={styles.container}>
             <View style={styles.profile_container}>
                 <Text style={styles.truth_title} >truth</Text>
-                <Pressable onPress={settings_press} >
+                
+                <View style={styles.profile_container02}>
+                    <Pressable onPress={settings_press} >
+                        <Image 
+                        source={gear_icon} 
+                        style={styles.gear_icon}/>
+                    </Pressable>
+                    <Pressable onPress={directMsg_press} >
+                        <Image 
+                        source={dm_icon} 
+                        style={styles.dm_icon}/>
+                    </Pressable>
                     <Image 
-                    source={gear_icon} 
-                    style={styles.gear_icon}/>
-                </Pressable>
-                <Pressable onPress={directMsg_press} >
-                    <Image 
-                    source={dm_icon} 
-                    style={styles.dm_icon}/>
-                </Pressable>
-                <Image 
-                source={profile_img} 
-                style={styles.profile_img}/>
-                <Text style={styles.username} >John Smith</Text>
-                <View style={styles.stats}>
-                    <Pressable onPress={followers_stats} >
-                        <View style={styles.followers}>
-                            <Text style={styles.stats_text}>Followers</Text>
-                            <View style={styles.follow_line}/>
-                            <Text style={styles.stats_text}>120</Text>
-                        </View>
-                    </Pressable>
-                    <View style={styles.stats_middle}/>
-                    
-                    <Pressable onPress={following_stats} > 
-                        <View style={styles.following}>
-                            <Text style={styles.stats_text}>Following</Text>
-                            <View style={styles.follow_line}/>
-                            <Text style={styles.stats_text}>70</Text>
-                        </View>
-                    </Pressable>
-                    
-                </View>
-                <View style={styles.profile_btns} >
-                    <Pressable onPress={wallet_press} style={styles.wallet_btn}>
-                        <LinearGradient 
-                        style={styles.wallet_grad} 
-                        colors={['#8F8F8F', '#616161']}
-                        start={{ x: 0, y: 1}}>
-                            <Text style={styles.wallet_text}>Wallet</Text>
-                        </LinearGradient>
-                    </Pressable>
-                    <View style={styles.btns_middle} />
-                    <Pressable onPress={editProfile_press} style={styles.editprof_btn}>
-                        <LinearGradient 
-                        style={styles.edit_grad} 
-                        colors={['#8F8F8F', '#616161']}
-                        start={{ x: 0, y: 1}}>
-                            <Text style={styles.editprof_text}>Edit Profile</Text>
-                        </LinearGradient>
-                    </Pressable>
+                    source={profile_img} 
+                    style={styles.profile_img}/>
+                    <Text style={styles.username} >John Smith</Text>
+                    <View style={styles.stats}>
+                        <Pressable onPress={followers_stats} >
+                            <View style={styles.followers}>
+                                <Text style={styles.stats_text}>Followers</Text>
+                                <View style={styles.follow_line}/>
+                                <Text style={styles.stats_text}>120</Text>
+                            </View>
+                        </Pressable>
+                        <View style={styles.stats_middle}/>
+                        
+                        <Pressable onPress={following_stats} > 
+                            <View style={styles.following}>
+                                <Text style={styles.stats_text}>Following</Text>
+                                <View style={styles.follow_line}/>
+                                <Text style={styles.stats_text}>70</Text>
+                            </View>
+                        </Pressable>
+                        
+                    </View>
+                    <View style={styles.profile_btns} >
+                        <Pressable onPress={wallet_press} style={styles.wallet_btn}>
+                            <LinearGradient 
+                            style={styles.wallet_grad} 
+                            colors={['#8F8F8F', '#616161']}
+                            start={{ x: 0, y: 1}}>
+                                <Text style={styles.wallet_text}>Wallet</Text>
+                            </LinearGradient>
+                        </Pressable>
+                        <View style={styles.btns_middle} />
+                        <Pressable onPress={editProfile_press} style={styles.editprof_btn}>
+                            <LinearGradient 
+                            style={styles.edit_grad} 
+                            colors={['#8F8F8F', '#616161']}
+                            start={{ x: 0, y: 1}}>
+                                <Text style={styles.editprof_text}>Edit Profile</Text>
+                            </LinearGradient>
+                        </Pressable>
+                    </View>
                 </View>
             </View>
+
             <Pressable onPress={plus_press} style={styles.postButton} >
                 <LinearGradient 
                 style={styles.postButton_grad} 
@@ -123,13 +127,14 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         width: '100%',
-        backgroundColor: '#535353'
+        backgroundColor: '#535353',
+        
     },
     truth_title: {
-        position: 'absolute',
+        
         top: 38,
-        left: 169,
-        fontSize: 40,
+        left: 0,
+        fontSize: 35,
         fontFamily: 'LinLibertime',
         color: 'black'
     },
@@ -167,19 +172,25 @@ const styles = StyleSheet.create({
         backgroundColor: '#424242',
         alignItems: 'center'
     },
+    profile_container02: {
+        top: -50,
+        alignItems: 'center'
+    },
     gear_icon: {
         position: 'absolute',
-        width: 37,
-        height: 37,
-        right: 65,
-        top: 43
+        zIndex: 3,
+        width: 30,
+        height: 40,
+        left: -90,
+        // backgroundColor: 'black'
+        top: 50
     },
     dm_icon: {
         position: 'absolute',
         width: 33,
         height: 25,
         left: 150,
-        top: 51
+        top: 60
     },
     profile_img: {
         height: 85,
