@@ -2,8 +2,8 @@ POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "username": "three",
-    "email": "three@email.com",
+    "username": "two",
+    "email": "two@email.com",
     "password": "password"
 }
 
@@ -27,3 +27,8 @@ Content-Type: application/json
     "email": "one@email.com",
     "password": "password"
 }
+
+###
+
+GET http://localhost:3000/token
+
