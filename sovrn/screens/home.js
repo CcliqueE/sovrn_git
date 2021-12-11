@@ -19,14 +19,13 @@ function Home({ navigation }) {
 		<View style={styles.container}>
 			<StatusBar barStyle='dark-content' />
 			<Pressable onPress={plus_press} activeOpacity={1} style={styles.postButton} >
+				<Image 
+				style={styles.plus_sign}
+				source={plus_img}/>
 				<LinearGradient 
 				style={styles.postButton_grad} 
 				colors={['#CFCFCF', '#777777']}
-				start={{ x: 0, y: 1}}>
-					<Image 
-					style={styles.plus_sign}
-					source={plus_img}/>
-				</LinearGradient>
+				start={{ x: 0, y: 1}}/>
 			</Pressable>
 		</View>
 	  );
@@ -41,11 +40,14 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	postButton: {
+        zIndex: 1,
 		position: 'absolute',
-		top: 40,
-		left: 15,
-		width: 65,
-        height: 65,
+        justifyContent: 'center',
+        alignItems: 'center',
+		top: window.height / 22,
+		right: window.width / 1.25,
+		width: window.width / 6,
+        height: window.width / 6,
         backgroundColor: "#ffffff",
         shadowColor: "#000000",
         shadowOpacity: 1.0,
@@ -55,16 +57,18 @@ const styles = StyleSheet.create({
 		overflow: 'hidden'
 	},
 	postButton_grad: {
-		right: 20,
-		width: 170,
-		height: '100%',
-        justifyContent: 'center'
+        position: 'absolute',
+		left: -window.width / 10,
+		width: window.width / 2,
+		height: '100%'
 	},
 	plus_sign: {
-		height: 30,
-		width: 30,
-        left: 37.5,
-		overflow: 'hidden'
+        zIndex: 1,
+        // position: 'absolute',
+        height: window.width / 13,
+		width: window.width / 13,
+        // left: window.width / 10.5,
+		// overflow: 'hidden'
 	}
 });
 

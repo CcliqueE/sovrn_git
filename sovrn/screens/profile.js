@@ -14,10 +14,8 @@ const dm_icon = require('../assets/img/dm_icon_2.png')
 
 export default function Profile({ navigation }) {
 	
-    
-
-    var username = '12345678912345'
-    if (username.length >= 15) {
+    var username = 'schaffer_luke'
+    if (username.length >= 17) {
         username = 'err'
     }
 
@@ -68,9 +66,17 @@ export default function Profile({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <Pressable onPress={plus_press} style={styles.postButton} >
+                <Image 
+                style={styles.plus_sign}
+                source={plus_img}/>
+                <LinearGradient 
+                style={styles.postButton_grad}
+                colors={['#CFCFCF', '#777777']}
+                start={{ x: 0, y: 1}}/>
+            </Pressable>
             <View style={styles.profile_container}>
                 <Text style={styles.truth_title} >sovrn</Text>
-                
                 <View style={styles.profile_container02}>
                     <Pressable onPress={settings_press} >
                         <Image 
@@ -82,56 +88,43 @@ export default function Profile({ navigation }) {
                         source={dm_icon} 
                         style={styles.dm_icon}/>
                     </Pressable>
+                <View style={styles.user_stat}>
                     <Image 
                     source={profile_img} 
                     style={styles.profile_img}/>
-                    <View style={styles.user_stat} >
+                    <View style={styles.stats}>
                     <View style={styles.username_container} >
                         <Text style={styles.username}>{username}</Text>
                     </View>
-                        <View style={styles.stats}>
-                            <Pressable onPress={followers_stats}>
-                                <View style={styles.followers}>
-                                    <Text style={styles.stats_text}>Followers</Text>
-                                    <View style={styles.follow_line}/>
-                                    <Text style={styles.stats_text}>120</Text>
-                                </View>
-                            </Pressable>
-                            <View style={styles.stats_middle}/>
-                            
-                            <Pressable onPress={following_stats} > 
-                                <View style={styles.following}>
-                                    <Text style={styles.stats_text}>Following</Text>
-                                    <View style={styles.follow_line}/>
-                                    <Text style={styles.stats_text}>70</Text>
-                                </View>
-                            </Pressable>
-                            
-                        </View>
+                        <Pressable onPress={followers_stats}>
+                            <View style={styles.followers}>
+                                <Text style={styles.stats_text}>Followers</Text>
+                                <View style={styles.follow_line}/>
+                                <Text style={styles.stats_text}>120</Text>
+                            </View>
+                        </Pressable>
+                        <View style={styles.stats_middle}/>
+                        <Pressable onPress={following_stats} > 
+                            <View style={styles.following}>
+                                <Text style={styles.stats_text}>Following</Text>
+                                <View style={styles.follow_line}/>
+                                <Text style={styles.stats_text}>70</Text>
+                            </View>
+                        </Pressable>
                     </View>
-                        
-                        <View style={styles.profile_btns} >
-                            <Pressable onPress={wallet_press} style={styles.wallet_btn}>
-                                <Text style={styles.wallet_text}>Wallet</Text>
-                            </Pressable>
-                            <View style={styles.btns_middle} />
-                            <Pressable onPress={editProfile_press} style={styles.editprof_btn}>
-                                <Text style={styles.editprof_text}>Edit Profile</Text>
-                            </Pressable>
-                        </View>
+                </View>
+                <View style={styles.profile_btns} >
+                    <Pressable onPress={wallet_press} style={styles.wallet_btn}>
+                        <Text style={styles.wallet_text}>Wallet</Text>
+                    </Pressable>
+                    <View style={styles.btns_middle}/>
+                        <Pressable onPress={editProfile_press} style={styles.editprof_btn}>
+                            <Text style={styles.editprof_text}>Edit Profile</Text>
+                        </Pressable>
+                    </View>
                 </View>
             </View>
-
-            <Pressable onPress={plus_press} style={styles.postButton} >
-                <LinearGradient 
-                style={styles.postButton_grad}
-                colors={['#CFCFCF', '#777777']}
-                start={{ x: 0, y: 1}}>
-                    <Image 
-                    style={styles.plus_sign}
-                    source={plus_img}/>
-                </LinearGradient>
-            </Pressable>
+            
         </View>
     )
 }
@@ -143,18 +136,22 @@ const styles = StyleSheet.create({
         backgroundColor: '#535353',
     },
     truth_title: {
+        position: 'absolute',
         top: window.height / 20 - 10,
-        left: 1,
-        fontSize: 37,
+        fontSize: window.width / 10,
         fontFamily: 'LinLibertime',
-        color: '#C2C2C2'
+        color: '#C2C2C2',
+        textAlign: 'center'
     },
     postButton: {
+        zIndex: 1,
 		position: 'absolute',
-		top: 40,
-		left: 15,
-		width: 65,
-        height: 65,
+        justifyContent: 'center',
+        alignItems: 'center',
+		top: window.height / 22,
+		right: window.width / 1.25,
+		width: window.width / 6,
+        height: window.width / 6,
         backgroundColor: "#ffffff",
         shadowColor: "#000000",
         shadowOpacity: 1.0,
@@ -164,75 +161,83 @@ const styles = StyleSheet.create({
 		overflow: 'hidden'
 	},
 	postButton_grad: {
-		right: 20,
-		width: 170,
-		height: '100%',
-        justifyContent: 'center'
+        position: 'absolute',
+		left: -window.width / 10,
+		width: window.width / 2,
+		height: '100%'
 	},
 	plus_sign: {
-		height: 30,
-		width: 30,
-        left: 37.5,
-		overflow: 'hidden'
+        zIndex: 1,
+        // position: 'absolute',
+        height: window.width / 13,
+		width: window.width / 13,
+        // left: window.width / 10.5,
+		// overflow: 'hidden'
 	},
     user_stat: {
+        flexDirection: 'row',
+        position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
-        left: 50,
-        top: 5,
+        // height: 10,
+        // left: 50,
+        top: window.height / 7,
         
     },
     profile_container: {
         width: '100%',
-        height: window.height / 2.7,
-        top: 0,
+        height: window.height / 2.8,
+        // top: 0,
         backgroundColor: '#424242',
         alignItems: 'center'
     },
     profile_container02: {
-        top: window.height / 20 - 100,
+        // top: window.height / 20 - 100,
         alignItems: 'center'
-    },
-    gear_icon: {
-        position: 'absolute',
-        width: 25,
-        height: 35,
-        left: window.width / 2 - 45,
-        top: window.height / 7.5
     },
     dm_icon: {
         position: 'absolute',
-        width: 33,
-        height: 25,
+        width: window.width / 12,
+        height: window.width / 16,
         left: window.width / 2 - 50,
-        top: window.height / 12
+        top: window.height / 17
+    },
+    gear_icon: {
+        position: 'absolute',
+        width: window.width / 12,
+        height: window.width / 11,
+        left: window.width / 2 - 50,
+        top: window.height / 9.5
     },
     profile_img: {
-        position: 'absolute',
-        height: 85,
-        width: 85,
-        right: window.width - 170,
+        // position: 'absolute',
+        height: window.width / 5,
+        width: window.width / 5,
+        right: window.width / 20,
         borderRadius: 50,
-        top: 140
+        // top: window.height / 6
     },
     username_container: {
-        width: 185,
-        height: 30,
+        position: 'absolute',
+        bottom: window.height / 13,
+        width: window.width / 2,
+        
+        // height: window.height / 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
     username: {
-        fontSize: 27,
-        top: 130,
-        left: 0,
+        fontSize: window.width / 17,
         textAlign: 'center',
+        right: 6,
         fontFamily: 'Louis',
         color: '#C2C2C2'
     },
     stats: {
         flexDirection: 'row',
-        top: 140,
-        left: 0
+        top: window.height / 60,
+        // left: 0,
+        // width: 
     },
     follow_line: {
         backgroundColor: 'black',
@@ -254,13 +259,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     stats_text: {
-        fontSize: 20,
+        // position: 'absolute',
+        fontSize: window.width / 19,
         fontFamily: 'Louis',
-        color: 'black'
+        color: 'black',
+        // width: 100
 
     },  
     profile_btns: {
-        top: 165,
+        position: 'absolute',
+        top: window.height / 3.6,
         flexDirection: 'row',
         
     },
@@ -289,13 +297,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     wallet_text: {
-        fontSize: 27,
+        fontSize: window.height / 30,
         top: 1,        
         fontFamily: 'Louis',
         color: '#424242'
     },
     editprof_text: {
-        fontSize: 27,
+        fontSize: window.height / 30,
         fontFamily: 'Louis',
         left: 2,
         top: 1,
