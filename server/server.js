@@ -69,16 +69,31 @@ app.post('/login', async (req, res) => {
     }
 })
 
-// app.post('/upload', async (res, req) => {
-// })
+app.post('/follow', async (req, res) => {
+    const query = await pool.query('SELECT username FROM users WHERE loginid = $1', [req.body.user_id])
+    const username_one = query.rows.map(({ username }) => username).toString()
+    const query_two = await pool.query('SELECT username FROM users WHERE username = $1', [req.body.username])
+    const username_two = query_two.rows.map(({ username }) => username).toString()
+    const follow = [username_one, username_two]
 
-app.get('/token', async (res, req) => {
-    
-    // try {
-    //     res.status(200).send(console.log(token))
-    // } catch (err) {
-    //     res.status(500).send(err.message)
-    // }
+    try{
+        const push = await pool.query('INSERT INTO "follows" (user_one, user_two) VALUES ($1, $2) RETURNING *', follow)
+        res.status(200).send(push.rows)
+    } catch (err) {
+        res.status(404).send(err.message)
+    }
+})
+
+app.post('/discover', async (req, res) => {
+    const query = await pool.query('SELECT * FROM follows WHERE user_one = $1 AND user_two ~ $2', [req.body.username, req.body.input])
+    const followed = query.rows.map(({ user_two }) => user_two).toString()
+    // const query_two = await pool.query('SELECT * FROM follows WHERE user_two = $1', [req.body.username])
+    // const following = query_two.rows.map(({ user_one }) => user_one).toString()
+    // const arr_2 = [followed, following]
+    // const query_three = await pool.query('SELECT * FROM follows WHERE user_two ~ $1 AND user_one ~ $1 AND ', [req.body.input])
+    // const list = query_three.rows.map(({ username }) => username).toString()
+    // const arr = [followed, following, list]
+    console.log(followed)
 })
 
 app.listen(3000, () => {console.log('server has started on port 3000')})

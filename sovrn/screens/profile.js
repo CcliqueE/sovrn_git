@@ -32,23 +32,33 @@ export default function Profile({ navigation }) {
 	}
 
     const directMsg_press = () => {
-		navigation.navigate('direct_msg')
+		navigation.navigate('direct_msg', {
+            location: 'profile'
+        })
 	}
 
     const followers_stats = () => {
-		navigation.navigate('followers')
+		navigation.navigate('followers', {
+            location: 'profile'
+        })
 	}
 
     const following_stats = () => {
-		navigation.navigate('following')
+		navigation.navigate('following', {
+            location: 'profile'
+        })
 	}
 
     const wallet_press = () => {
-		navigation.navigate('wallet')
+		navigation.navigate('wallet', {
+            location: 'profile'
+        })
 	}
 
     const editProfile_press = () => {
-		navigation.navigate('edit_profile')
+		navigation.navigate('edit_profile', {
+            location: 'profile'
+        })
 	}
 
     const [loaded] = useFonts({
@@ -88,43 +98,48 @@ export default function Profile({ navigation }) {
                         source={dm_icon} 
                         style={styles.dm_icon}/>
                     </Pressable>
-                <View style={styles.user_stat}>
-                    <Image 
-                    source={profile_img} 
-                    style={styles.profile_img}/>
-                    <View style={styles.stats}>
-                    <View style={styles.username_container} >
-                        <Text style={styles.username}>{username}</Text>
+                    <View style={styles.user_stat}>
+                        <Image 
+                        source={profile_img} 
+                        style={styles.profile_img}/>
+                        <View style={styles.stats}>
+                            <View style={styles.username_container} >
+                                <Text style={styles.username}>{username}</Text>
+                            </View>
+                            <Pressable onPress={followers_stats}>
+                                <View style={styles.followers}>
+                                    <Text style={styles.stats_text}>Followers</Text>
+                                    <View style={styles.follow_line}/>
+                                    <Text style={styles.stats_text}>120</Text>
+                                </View>
+                            </Pressable>
+                            <View style={styles.stats_middle}/>
+                            <Pressable onPress={following_stats} > 
+                                <View style={styles.following}>
+                                    <Text style={styles.stats_text}>Following</Text>
+                                    <View style={styles.follow_line}/>
+                                    <Text style={styles.stats_text}>70</Text>
+                                </View>
+                            </Pressable>
+                        </View>
                     </View>
-                        <Pressable onPress={followers_stats}>
-                            <View style={styles.followers}>
-                                <Text style={styles.stats_text}>Followers</Text>
-                                <View style={styles.follow_line}/>
-                                <Text style={styles.stats_text}>120</Text>
+                    <View style={styles.profile_btns} >
+                        <Pressable onPress={wallet_press} style={styles.wallet_btn}>
+                            <Text style={styles.wallet_text}>Wallet</Text>
+                            <View style={styles.notification_pop}>
+                                <LinearGradient 
+                                style={styles.notification_pop_gradient} 
+                                colors={['black', '#292929']} 
+                                start={{x: 1, y: 0}}/>
                             </View>
                         </Pressable>
-                        <View style={styles.stats_middle}/>
-                        <Pressable onPress={following_stats} > 
-                            <View style={styles.following}>
-                                <Text style={styles.stats_text}>Following</Text>
-                                <View style={styles.follow_line}/>
-                                <Text style={styles.stats_text}>70</Text>
-                            </View>
-                        </Pressable>
-                    </View>
-                </View>
-                <View style={styles.profile_btns} >
-                    <Pressable onPress={wallet_press} style={styles.wallet_btn}>
-                        <Text style={styles.wallet_text}>Wallet</Text>
-                    </Pressable>
-                    <View style={styles.btns_middle}/>
+                        <View style={styles.btns_middle}/>
                         <Pressable onPress={editProfile_press} style={styles.editprof_btn}>
                             <Text style={styles.editprof_text}>Edit Profile</Text>
                         </Pressable>
                     </View>
                 </View>
             </View>
-            
         </View>
     )
 }
@@ -276,7 +291,7 @@ const styles = StyleSheet.create({
         width: 25
     },
     wallet_btn: {
-        overflow: 'hidden',
+        // overflow: 'hidden',
         borderRadius: 5,
         alignItems: 'center',
 		backgroundColor: '#8F8F8F',
@@ -284,7 +299,21 @@ const styles = StyleSheet.create({
         height: window.height / 20,
         justifyContent: 'center',
         alignItems: 'center'
-
+    },
+    notification_pop: {
+        position: 'absolute',
+        overflow: 'hidden',
+        width: window.width / 20,
+        height: window.width / 20,
+        left: -7,
+        top: -7,
+        borderRadius: 50,
+        backgroundColor: '#222222'
+    },
+    notification_pop_gradient: {
+        width: 100,
+        height: '100%',
+        right: 35
     },
     editprof_btn: {
         overflow: 'hidden',

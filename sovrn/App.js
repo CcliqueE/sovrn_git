@@ -29,19 +29,19 @@ export default function App() {
 				<Stack.Group screenOptions={{headerShown: false}}>
 					<Stack.Screen name='settings' component={Settings}/>
 				</Stack.Group>
-				<Stack.Group>
+				<Stack.Group screenOptions={{headerShown: false}}>
 					<Stack.Screen name='direct_msg' component={DirectMsg}/>
 				</Stack.Group>
-				<Stack.Group>
+				<Stack.Group screenOptions={{headerShown: false}}>
 					<Stack.Screen name='wallet' component={Wallet}/>
 				</Stack.Group>
-				<Stack.Group>
+				<Stack.Group screenOptions={{headerShown: false}}>
 					<Stack.Screen name='edit_profile' component={EditProfile}/>
 				</Stack.Group>
-				<Stack.Group>
+				<Stack.Group screenOptions={{headerShown: false}}>
 					<Stack.Screen name='following' component={Following}/>
 				</Stack.Group>
-				<Stack.Group>
+				<Stack.Group screenOptions={{headerShown: false}}>
 					<Stack.Screen name='followers' component={Followers}/>
 				</Stack.Group>
 				

@@ -19,7 +19,7 @@ export default function Discover({ navigation }) {
 	const [trending_color, setTrending_color] = useState('none')
 	const [news_color, setNews_color] = useState('none')
 
-	const scroll_ref = useRef(null)
+	const scroll_ref = useRef('scroll_ref')
 
 	const trending_press = () => {
 		setScreen('trending')
@@ -49,8 +49,6 @@ export default function Discover({ navigation }) {
 	const reset_scroll = () => {
 		// scroll_ref.scrollTo({x: 0, y: 0, animated: false})
 	}
-
-	// useScrollToTop(scroll_ref)
 
 	if (!loaded) {
         return null;

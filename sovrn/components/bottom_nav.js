@@ -94,23 +94,23 @@ const styles = StyleSheet.create({
 	icon_flow: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		top: window.height / 20 - 35
+		top: window.height / 80
 	},
 	home_icon: {
-		width: 25,
-		height: 25
+		width: window.width / 15,
+		height: window.width / 15
 	},
 	discover_icon: {
-		width: 25,
-		height: 27
+		width: window.width / 15,
+		height: window.width / 14
 	},
 	noti_icon: {
-		width: 28,
-		height: 25
+		width: window.width / 13,
+		height: window.width / 15
 	},
 	profile_icon: {
-		width: 25,
-		height: 28
+		width: window.width / 15,
+		height: window.width / 13
 	}
   });
   
