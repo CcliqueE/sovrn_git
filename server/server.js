@@ -1,15 +1,28 @@
 // const PORT = process.env.PORT || 3000
+const fs = require('fs')
+const https = require('https');
 const express = require('express')
-const app = express()
 const pool = require('./db')
 const cors = require('cors')
 const bcrypt = require('bcrypt')
 const getToken = require('crypto')
 
+const privateKey = fs.readFileSync('./sovrn-key.pem', 'utf8')
+const certificate = fs.readFileSync('./sovrn.pem', 'utf8')
+
+// console.log(privateKey)
+// console.log(certificate)
+
+const app = express()
+// const credentials = {
+//     key: privateKey,
+//     cert: certificate
+// }
 // const execSync = require('child_process').execSync
 
 // const output = execSync('heroku config api-inv-fou:get DATABASE_URL', { encoding: 'utf-8' })
 // console.log(output)
+
 
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
@@ -86,14 +99,27 @@ app.post('/follow', async (req, res) => {
 
 app.post('/discover', async (req, res) => {
     const query = await pool.query('SELECT * FROM follows WHERE user_one = $1 AND user_two ~ $2', [req.body.username, req.body.input])
-    const followed = query.rows.map(({ user_two }) => user_two).toString()
-    // const query_two = await pool.query('SELECT * FROM follows WHERE user_two = $1', [req.body.username])
-    // const following = query_two.rows.map(({ user_one }) => user_one).toString()
-    // const arr_2 = [followed, following]
-    // const query_three = await pool.query('SELECT * FROM follows WHERE user_two ~ $1 AND user_one ~ $1 AND ', [req.body.input])
-    // const list = query_three.rows.map(({ username }) => username).toString()
-    // const arr = [followed, following, list]
-    console.log(followed)
+    const following = query.rows.map(({ user_two }) => user_two)
+    const query_two = await pool.query('SELECT * FROM follows WHERE user_two = $1 AND user_one ~ $2', [req.body.username, req.body.input])
+    const followed = query_two.rows.map(({ user_one }) => user_one)
+    // const arr = [following, followed]
+    console.log(['Following: ' + following.length, 'Followed: ' + followed.length])
+    if (following.length <= 5) {
+        const followed_num = 5 - following.length
+        var arr = [followed.slice(0, followed_num - 1)]
+        console.log(arr)
+    }
+    try {
+        res.status(200).send([following, followed])
+    } catch (err) {
+        res.status(404).send(err.message)
+    }
 })
 
+// const httpsServer = https.createServer(credentials, app)
+
+// console.log(httpsServer.listen)
+
+
 app.listen(3000, () => {console.log('server has started on port 3000')})
+// httpsServer.listen(3000, () => {console.log('server has started on port ' + 3000)})

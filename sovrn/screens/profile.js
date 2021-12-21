@@ -76,6 +76,7 @@ export default function Profile({ navigation }) {
 
     return (
         <View style={styles.container}>
+            <View style={styles.postButton_shadow}/>
             <Pressable onPress={plus_press} style={styles.postButton} >
                 <Image 
                 style={styles.plus_sign}
@@ -168,13 +169,24 @@ const styles = StyleSheet.create({
 		width: window.width / 6,
         height: window.width / 6,
         backgroundColor: "#ffffff",
-        shadowColor: "#000000",
-        shadowOpacity: 1.0,
-        shadowRadius: 2,
 		borderRadius: 50,
 		backgroundColor: '#828282',
 		overflow: 'hidden'
 	},
+    postButton_shadow: {
+        zIndex: 1,
+        position: 'absolute',
+        backgroundColor: 'black',
+        borderRadius: 50,
+        width: window.width / 6,
+        height: window.width / 6,
+        top: window.height / 22,
+        right: window.width / 1.25,
+        shadowOpacity: 1,
+        shadowColor: '#252525',
+        shadowRadius: 3,
+        shadowOffset: {height: 0}
+    },
 	postButton_grad: {
         position: 'absolute',
 		left: -window.width / 10,
@@ -298,9 +310,14 @@ const styles = StyleSheet.create({
         width: window.width / 3,
         height: window.height / 20,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        shadowOpacity: 1,
+        shadowRadius: 3,
+        shadowOffset: {height: 0},
+        shadowColor: '#252525'
     },
     notification_pop: {
+        zIndex: 1,
         position: 'absolute',
         overflow: 'hidden',
         width: window.width / 20,
@@ -308,22 +325,31 @@ const styles = StyleSheet.create({
         left: -7,
         top: -7,
         borderRadius: 50,
-        backgroundColor: '#222222'
+        backgroundColor: '#222222',
+        
     },
     notification_pop_gradient: {
-        width: 100,
+        width: 30,
         height: '100%',
-        right: 35
+        // borderRadius: 50,
+        // shadowColor: 'black',
+        // shadowOpacity: 1,
+        // shadowRadius: 10
+        // right: 35
     },
     editprof_btn: {
-        overflow: 'hidden',
+        // overflow: 'hidden',
         borderRadius: 5,
         alignItems: 'center',
 		backgroundColor: '#8F8F8F',
         width: window.width / 2.3,
         height: window.height / 20,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        shadowOpacity: 1,
+        shadowRadius: 3,
+        shadowOffset: {height: 0},
+        shadowColor: '#252525'
     },
     wallet_text: {
         fontSize: window.height / 30,

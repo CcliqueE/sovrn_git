@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, useRef } from 'react';
-import axios from 'axios'
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, ScrollView, Keyboard, Pressable, Dimensions } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useScrollToTop } from '@react-navigation/native';
@@ -18,6 +17,7 @@ export default function Discover({ navigation }) {
 	const [screen, setScreen] = useState('recommended')
 	const [trending_color, setTrending_color] = useState('none')
 	const [news_color, setNews_color] = useState('none')
+	const [users, setUsers] = useState([])
 
 	const scroll_ref = useRef('scroll_ref')
 
@@ -41,28 +41,60 @@ export default function Discover({ navigation }) {
 			setTrending_color('#535353')
 	}
 
+	const onInput = async () => {
+		// try {
+		console.log(search_input)
+		const response = await fetch(
+			'http://localhost:3000/discover', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				username: 'jackson',
+				input: 'o'
+			})
+		})
+		console.log(await response.json())
+		// .then((res) => {console.log(res)})
+		// .catch((err) => console.log(err))
+		// console.log(response)
+		
+		// } catch (error) {
+		  // handle error
+		//   console.log(error);
+		// }
+	};
+
 	const [loaded] = useFonts({
-        'Louis': require('../assets/fonts/Louis_George_Cafe.ttf'),
-        // 'LinLibertime': require('../assets/fonts/LinLibertime.ttf')
-    })
+		'Louis': require('../assets/fonts/Louis_George_Cafe.ttf'),
+		// 'LinLibertime': require('../assets/fonts/LinLibertime.ttf')
+	})
 
 	const reset_scroll = () => {
 		// scroll_ref.scrollTo({x: 0, y: 0, animated: false})
 	}
 
 	if (!loaded) {
-        return null;
-    }
+		return null;
+	}
 	return (
 		<View style={styles.container}>
-    		<StatusBar barStyle="light-content" />
+			<StatusBar barStyle="light-content" />
 			<View style={styles.search_container} >
 				<View style={styles.search_bar} >
 					<TextInput 
 					selectionColor="#535353" 
 					defaultValue={search_input} 
-					onChangeText={search_input => setText(search_input)} 
-					style={styles.search_input} />
+					onChange={search_input => {
+						setText(search_input)
+						onInput}} 
+					style={styles.search_input} 
+					// onChange={onInput}
+					onSubmitEditing={onInput}
+					/>
+					
 				</View>
 				<View style={styles.interest_tabs} >
 						<Pressable 

@@ -1,5 +1,5 @@
-import { StyleSheet, View, Image, Dimensions } from 'react-native';
 import React from 'react';
+import { StyleSheet, View, Image, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from '../screens/home'
@@ -12,8 +12,6 @@ const window = Dimensions.get('window')
 const Tab = createBottomTabNavigator()
 
 export default function Bottom_Nav() {
-
-
 
 	return (
 		<Tab.Navigator 
@@ -94,13 +92,14 @@ const styles = StyleSheet.create({
 	icon_flow: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		top: window.height / 80
+		top: window.height / 140
 	},
 	home_icon: {
 		width: window.width / 15,
 		height: window.width / 15
 	},
 	discover_icon: {
+		// left: 100,
 		width: window.width / 15,
 		height: window.width / 14
 	},

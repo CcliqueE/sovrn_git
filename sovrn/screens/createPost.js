@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'gray',
 		top: 40,
 		borderRadius: 10,
-		left: 240,
+		left: window.width - 150,
 		width: 150,
 		height: 50
 	},

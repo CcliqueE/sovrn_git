@@ -2,21 +2,12 @@ POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-    "username": "one",
-    "email": "one@email.com",
+    "username": "jacob",
+    "email": "jacob@email.com",
     "password": "password"
 }
 
 ###
-
-POST https://api-inv-fou.herokuapp.com/register
-Content-Type: application/json
-
-{
-    "username": "six",
-    "email": "six@email.com",
-    "password": "password"
-}
 
 ###
 
@@ -30,5 +21,20 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/token
+POST http://localhost:3000/follow
+Content-Type: application/json
 
+{
+    "user_id": "380876dd4079d847a058d2259618be59dd",
+    "username": "jacob"
+}
+
+###
+
+POST http://localhost:3000/discover
+Content-Type: application/json
+
+{
+    "username": "jackson",
+    "input": "four"
+}
