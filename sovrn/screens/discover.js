@@ -8,12 +8,15 @@ import Recommended from '../components/recommended'
 import Trending from '../components/trending'
 import News from '../components/news'
 import { set } from 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const window = Dimensions.get('window')
 
 export default function Discover({ navigation }) {
 
 	const [search_input, setText] = useState('')
+	const [show_results, setShow_results] = useState(false)
+	const [search_results, setResults] = useState([])
 	const [screen, setScreen] = useState('recommended')
 	const [trending_color, setTrending_color] = useState('none')
 	const [news_color, setNews_color] = useState('none')
@@ -41,31 +44,76 @@ export default function Discover({ navigation }) {
 			setTrending_color('#535353')
 	}
 
-	const onInput = async () => {
-		// try {
-		console.log(search_input)
-		const response = await fetch(
-			'http://localhost:3000/discover', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				username: 'jackson',
-				input: 'o'
-			})
-		})
-		console.log(await response.json())
+	const two_func_one = ( i ) => {
+		setText(i);
+		onInput(i);
+	}
+
+	const onInput = async ( i ) => {
+		// setText(i)
+		// console.log(i)
+		// const input = i.toLowerCase()
+		// console.log(input)
+		if (i !== '') {
+			try {
+				const response = await fetch(
+					'http://localhost:3000/discover', {
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						username: 'jackson',
+						input: i.toLowerCase()
+					})
+				})
+				const arr = []
+				var json = await response.json()
+				// console.log(json[0].length)
+				if (parseInt(json[0].length) !== 0) {
+					var length_one = parseInt(json[0].length) - 1
+					// var length_one = 
+				}
+				if (parseInt(json[1].length) !== 0) {
+					var length_two = parseInt(json[1].length) - 1
+					// var length_two = 1
+				}
+				for (let i = 0; i <= (parseInt(length_one)); i++) {
+					arr.push(json[0][i])
+				}
+				for (let i = 0; i <= (parseInt(length_two)); i++) {
+					arr.push(json[0][i])
+				}
+				console.log(arr)
+				// console.log(arr)
+				setResults(arr)
+			} 
+			catch (error) {
+			// handle error
+			console.log(error);
+			}
+		}
+		
+		// console.log(await response.json())
 		// .then((res) => {console.log(res)})
 		// .catch((err) => console.log(err))
 		// console.log(response)
 		
-		// } catch (error) {
-		  // handle error
-		//   console.log(error);
-		// }
 	};
+
+	// console.log(search_results[0][0])
+
+
+	const on_input_press = () => {
+		if (show_results === false) {
+			setShow_results(true)
+		} else {
+			setShow_results(false)
+		}
+	}
+	
+	// console.log(search_input)
 
 	const [loaded] = useFonts({
 		'Louis': require('../assets/fonts/Louis_George_Cafe.ttf'),
@@ -86,13 +134,14 @@ export default function Discover({ navigation }) {
 				<View style={styles.search_bar} >
 					<TextInput 
 					selectionColor="#535353" 
-					defaultValue={search_input} 
-					onChange={search_input => {
-						setText(search_input)
-						onInput}} 
+					// defaultValue={search_input} 
+					// onChange={i => onInput(i)}
+					onPressIn={on_input_press}
+					onChangeText={i => two_func_one(i)} 
 					style={styles.search_input} 
-					// onChange={onInput}
-					onSubmitEditing={onInput}
+					placeholder='search'
+					// value={search_input}
+					// onSubmitEditing={onInput}
 					/>
 					
 				</View>
@@ -127,6 +176,15 @@ export default function Discover({ navigation }) {
 						</Pressable>
 				</View>
 			</View>
+			<SafeAreaView style={styles.search_results_container}>
+				<View style={styles.search_results}>
+					<Text>{search_results[0]}</Text>
+					<Text>{search_results[1]}</Text>
+					<Text>{search_results[2]}</Text>
+					<Text>{search_results[3]}</Text>
+					<Text>{search_results[4]}</Text>
+				</View>
+			</SafeAreaView>
 			<View style={styles.scroll_contianer} >
 				<ScrollView 
 				ref={scroll_ref} 
@@ -191,6 +249,20 @@ const styles = StyleSheet.create({
 	},
 	middle: {
 		width: 50
+	},
+	search_results_container: {
+		position: 'absolute',
+		alignItems: 'flex-end',
+		// height: window.height,
+		zIndex: 1
+	},
+	search_results: {
+		// position: 'absolute',
+		top: window.height / 10,
+		backgroundColor: 'gray',
+		width: window.width / 1.1,
+		height: window.height / 2,
+		borderRadius: 10
 	},
 	tansparency: {
 		height: 155

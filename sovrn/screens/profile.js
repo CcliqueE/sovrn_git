@@ -4,6 +4,7 @@ import { StyleSheet, Text, Button, View, Pressable, Image, Dimensions } from 're
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts } from 'expo-font';
 import axios from 'axios'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const window = Dimensions.get('window')
 
@@ -87,7 +88,9 @@ export default function Profile({ navigation }) {
                 start={{ x: 0, y: 1}}/>
             </Pressable>
             <View style={styles.profile_container}>
+                <SafeAreaView style={styles.truth_title_container}>
                 <Text style={styles.truth_title} >sovrn</Text>
+                </SafeAreaView>
                 <View style={styles.profile_container02}>
                     <Pressable onPress={settings_press} >
                         <Image 
@@ -151,9 +154,17 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#535353',
     },
+    truth_title_container: {
+        position: 'absolute',
+        top: 0,
+        height: window.height / 12,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        width: window.width
+    },
     truth_title: {
         position: 'absolute',
-        top: window.height / 20 - 10,
+        // top: window.height / 20 - 10,
         fontSize: window.width / 10,
         fontFamily: 'LinLibertime',
         color: '#C2C2C2',
