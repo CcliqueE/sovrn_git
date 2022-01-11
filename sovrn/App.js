@@ -11,6 +11,7 @@ import Following from './screens/following'
 import Followers from './screens/followers'
 import DirectMsg from './screens/direct_msg';
 import Settings from './screens/settings';
+import User from './screens/_user'
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +44,9 @@ export default function App() {
 				</Stack.Group>
 				<Stack.Group screenOptions={{headerShown: false}}>
 					<Stack.Screen name='followers' component={Followers}/>
+				</Stack.Group>
+				<Stack.Group screenOptions={{headerShown: false}}>
+					<Stack.Screen name='_user' component={User}/>
 				</Stack.Group>
 				
 			</Stack.Navigator>

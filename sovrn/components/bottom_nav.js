@@ -20,6 +20,7 @@ export default function Bottom_Nav() {
 			tabBarStyle: [styles.container]
 
 		}} >
+			
 			<Tab.Screen name="home" component={Home} options={{ headerStyle: {height: 0}, animationEnabled: false,
 			tabBarIcon: ({ focused }) => (
 				<View style={styles.icon_flow}>
@@ -81,18 +82,19 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		bottom: 0,
 		width: '100%',
-		height: window.height / 10,
+		height: window.height / 9,
 		backgroundColor: '#444444',
 		borderTopLeftRadius: 10,
 		borderTopRightRadius: 10,
-		justifyContent: 'center',
+		justifyContent: 'flex-start',
 		alignItems: 'center',
 		borderTopWidth: 0
     },
 	icon_flow: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		top: window.height / 140
+		// justifyContent: 'center',
+		// alignItems: 'center',
+		// top: 10
+		// top: window.height / 140
 	},
 	home_icon: {
 		width: window.width / 15,

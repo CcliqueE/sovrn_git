@@ -5,7 +5,7 @@ const express = require('express')
 const pool = require('./db')
 const cors = require('cors')
 const bcrypt = require('bcrypt')
-const getToken = require('crypto')
+const getToken = require('crypto');
 
 const privateKey = fs.readFileSync('./sovrn-key.pem', 'utf8')
 const certificate = fs.readFileSync('./sovrn.pem', 'utf8')
@@ -102,6 +102,9 @@ app.post('/discover', async (req, res) => {
     const following = query.rows.map(({ user_two }) => user_two)
     const query_two = await pool.query('SELECT * FROM follows WHERE user_two = $1 AND user_one ~ $2', [req.body.username, req.body.input])
     const followed = query_two.rows.map(({ user_one }) => user_one)
+    // const query_three = await pool.query('SELECT * FROM users WHERE username ~ $1', [req.body.input])
+    // const users = query_three.rows.map(({ username }) => username)
+    // console.log(users)
     // const arr = [following, followed]
     console.log(['Following: ' + following.length, 'Followed: ' + followed.length])
     if (following.length <= 5) {
@@ -111,9 +114,16 @@ app.post('/discover', async (req, res) => {
     }
     try {
         res.status(200).send([following, followed])
+        // res.status(200).send([users])
     } catch (err) {
         res.status(404).send(err.message)
     }
+})
+
+app.post('/follow_count', async (res, req) => {
+    const query = await pool.query('SELECT user_two FROM follows WHERE user_one = $1', [req.body.login_id])
+    const number_follow = query.rows.map(({ user_two }) => user_two).length
+    console.log(number_follow)
 })
 
 // const httpsServer = https.createServer(credentials, app)

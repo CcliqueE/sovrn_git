@@ -26,7 +26,7 @@ Content-Type: application/json
 
 {
     "user_id": "380876dd4079d847a058d2259618be59dd",
-    "username": "jacob"
+    "username": "j"
 }
 
 ###
@@ -35,6 +35,15 @@ POST http://localhost:3000/discover
 Content-Type: application/json
 
 {
-    "username": "jackson",
-    "input": "four"
+    "username": "one",
+    "input": "o"
+}
+
+###
+
+POST http://localhost:3000/follow_count
+Content-Type: application/json
+
+{
+    "login_id": ""
 }
